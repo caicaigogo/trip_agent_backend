@@ -46,9 +46,43 @@ async def plan_trip(request: TripRequest):
                 'transportation': '交通方式',
                 'accommodation': '住宿',
                 'attractions': [
-                    {'name': '长城'},
-                    {'name': '故宫'}
-                ]
+                    {
+                        'name': '长城',
+                        'ticket_price': 100,
+                        'address': 'no1',
+                        'visit_duration': 60,
+                        'description': 'beautiful',
+                        'rating': 5.0
+                    },
+                    {
+                        'name': '故宫',
+                        'ticket_price': 150,
+                        'address': 'no2',
+                        'visit_duration': 120,
+                        'description': 'pretty',
+                        'rating': 4.8
+                    }
+                ],
+                'hotel': {
+                    'name': '文华酒店',
+                    'address': '150号',
+                    'price_range': '1000-2000',
+                    'rating': '4.7',
+                    'distance': '1.5km',
+                    'type': '豪华酒店'
+                },
+                'meals': [
+                    {
+                        'name': '面线糊',
+                        'type': 'breakfast',
+                        'description': 'delicious'
+                    },
+                    {
+                        'name': '沙茶面',
+                        'type': 'lunch',
+                        'description': 'yummy'
+                    }
+                ],
             },
             {
                 'date': request.end_date,
@@ -57,11 +91,53 @@ async def plan_trip(request: TripRequest):
                 'transportation': '交通方式',
                 'accommodation': '住宿',
                 'attractions': [
-                    {'name': '天坛'}
-                ]
+                    {
+                        'name': '天坛',
+                        'ticket_price': 200,
+                        'address': 'no3',
+                        'visit_duration': 150,
+                        'description': 'interesting',
+                        'rating': 4.1
+                    }
+                ],
+                'hotel': {
+                    'name': '四季酒店',
+                    'address': '100号',
+                    'price_range': '5000-1000',
+                    'rating': '4.5',
+                    'distance': '1.2km',
+                    'type': '标准酒店'
+                },
+                'meals': [
+                    {
+                        'name': '热干面',
+                        'type': 'snack',
+                        'description': 'good'
+                    }
+                ],
             }
         ]
-        weather_info = [{'date': request.start_date}, {'date': request.end_date}]
+
+        weather_info = [
+            {
+                'date': request.start_date,
+                'day_weather': '晴',
+                'night_weather': '晴',
+                'day_temp': 15,
+                'night_temp': 25,
+                'wind_direction': '东南',
+                'wind_power': '3',
+            },
+            {
+                'date': request.end_date,
+                'day_weather': '晴',
+                'night_weather': '雨',
+                'day_temp': 18,
+                'night_temp': 10,
+                'wind_direction': '西北',
+                'wind_power': '8',
+            }
+        ]
         data = {
             'city': request.city,
             'start_date': request.start_date,

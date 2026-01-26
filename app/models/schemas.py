@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 
 
@@ -16,9 +16,42 @@ class TripRequest(BaseModel):
     free_text_input: Optional[str] = Field(default="", description="额外要求", example="希望多安排一些博物馆")
 
 
+class WeatherInfo(BaseModel):
+    """天气信息"""
+    date: str = Field(..., description="日期 YYYY-MM-DD")
+    day_weather: str = Field(default="", description="白天天气")
+    night_weather: str = Field(default="", description="夜间天气")
+    day_temp: Union[int, str] = Field(default=0, description="白天温度")
+    night_temp: Union[int, str] = Field(default=0, description="夜间温度")
+    wind_direction: str = Field(default="", description="风向")
+    wind_power: str = Field(default="", description="风力")
+
+
 class Attraction(BaseModel):
     """景点信息"""
     name: str = Field(..., description="景点名称")
+    ticket_price: int = Field(default=0, description="门票价格(元)")
+    address: str = Field(..., description="地址")
+    visit_duration: int = Field(..., description="建议游览时间(分钟)")
+    rating: Optional[float] = Field(default=None, description="评分")
+    description: str = Field(..., description="景点描述")
+
+
+class Meal(BaseModel):
+    """餐饮信息"""
+    type: str = Field(..., description="餐饮类型: breakfast/lunch/dinner/snack")
+    name: str = Field(..., description="餐饮名称")
+    description: Optional[str] = Field(default=None, description="描述")
+
+
+class Hotel(BaseModel):
+    """酒店信息"""
+    name: str = Field(..., description="酒店名称")
+    address: str = Field(default="", description="酒店地址")
+    price_range: str = Field(default="", description="价格范围")
+    rating: str = Field(default="", description="评分")
+    distance: str = Field(default="", description="距离景点距离")
+    type: str = Field(default="", description="酒店类型")
 
 
 class DayPlan(BaseModel):
@@ -28,12 +61,9 @@ class DayPlan(BaseModel):
     description: str = Field(..., description="当日行程描述")
     transportation: str = Field(..., description="交通方式")
     accommodation: str = Field(..., description="住宿")
+    hotel: Optional[Hotel] = Field(default=None, description="推荐酒店")
     attractions: List[Attraction] = Field(default=[], description="景点列表")
-
-
-class WeatherInfo(BaseModel):
-    """天气信息"""
-    date: str = Field(..., description="日期 YYYY-MM-DD")
+    meals: List[Meal] = Field(default=[], description="餐饮列表")
 
 
 class Budget(BaseModel):
