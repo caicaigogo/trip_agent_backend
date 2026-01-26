@@ -3,6 +3,7 @@ from ...models.schemas import (
     TripRequest,
     TripPlanResponse
 )
+from ...agents.trip_planner_agent import get_trip_planner_agent
 
 router = APIRouter(prefix="/trip", tags=["旅行规划"])
 
