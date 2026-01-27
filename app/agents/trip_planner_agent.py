@@ -17,6 +17,8 @@ class MultiAgentTripPlanner:
             import traceback
             traceback.print_exc()
             raise
+
+
 # 全局多智能体系统实例
 _multi_agent_planner = None
 

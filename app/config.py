@@ -1,5 +1,10 @@
 """配置管理模块"""
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+
+# 加载环境变量
+# 首先尝试加载当前目录的.env
+load_dotenv()
 
 
 class Settings(BaseSettings):

@@ -163,3 +163,26 @@ async def plan_trip(request: TripRequest):
             status_code=500,
             detail=f"生成旅行计划失败: {str(e)}"
         )
+
+
+@router.get(
+    "/health",
+    summary="健康检查",
+    description="检查旅行规划服务是否正常"
+)
+async def health_check():
+    """健康检查"""
+    try:
+        # 检查Agent是否可用
+        agent = get_trip_planner_agent()
+
+        return {
+            "status": "healthy",
+            "service": "trip-planner",
+            "agent_name": agent.llm.provider + ':' + agent.llm.model
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"服务不可用: {str(e)}"
+        )
