@@ -179,7 +179,7 @@ async def health_check():
         return {
             "status": "healthy",
             "service": "trip-planner",
-            "agent_name": agent.llm.provider + ':' + agent.llm.model
+            "agent_name": agent.llm.base_url + ':' + agent.llm.model
         }
     except Exception as e:
         raise HTTPException(

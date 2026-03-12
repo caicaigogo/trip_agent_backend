@@ -1,4 +1,3 @@
-from ..config import get_settings
 from ..services.llm_service import get_llm
 
 
@@ -10,7 +9,6 @@ class MultiAgentTripPlanner:
         print("🔄 开始初始化多智能体旅行规划系统...")
 
         try:
-            settings = get_settings()
             self.llm = get_llm()
         except Exception as e:
             print(f"❌ 多智能体系统初始化失败: {str(e)}")
